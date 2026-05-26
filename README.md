@@ -12,22 +12,28 @@ individuels avec leurs squelettes et mini-cours.
 
 | Fichier | Quand le mobiliser ? |
 |---|---|
-| `canevas-cas-usage-v2.ipynb` | **Trame du notebook certif M9** — à utiliser comme grille de référence dès M0, sections ouvertes module par module (cf. tableau « Mobilisation » à l'intérieur) |
-| `journal-de-bord.ipynb` | **Journal quotidien** à tenir au fil du parcours — sera fusionné avec le canevas en M9 (cf. `merge_for_certif.py` du repo `ia-atos-parcours`) |
-| `PlanningSemaineFormation.png` | Planning visuel du parcours — sur quelle semaine quel module |
+| [`00_competences_referentiels.md`](./00_competences_referentiels.md) | **Source de vérité des compétences** — 9 C techniques (CISIA) + 9 CT transversales (OPCO ATLAS) avec intitulés officiels, niveaux Simplon et mapping par module. À garder sous la main pendant tout le parcours. |
+| [`canvas-cas-usage-v2.ipynb`](./canvas-cas-usage-v2.ipynb) | **Trame du notebook certif M9** — à utiliser comme grille de référence dès M0, sections ouvertes module par module (cf. tableau « Mobilisation » à l'intérieur). |
+| [`matrice-notebook-initiale.ipynb`](./matrice-notebook-initiale.ipynb) | **Matrice initiale du notebook** — version brute distribuée en amont, à mettre en regard du canvas pour comprendre l'évolution attendue. |
+| [`journal-de-bord.ipynb`](./journal-de-bord.ipynb) | **Journal quotidien** à tenir au fil du parcours — sera fusionné avec le canvas en M9 (cf. `merge_for_certif.py` du repo `ia-atos-parcours`). |
+| `PlanningSemaineFormation.png` | Planning visuel du parcours — sur quelle semaine quel module. |
 
 ---
 
 ## 🚀 Utilisation pour les apprenants
 
 1. **Clone ce repo une fois** ou utilise les liens directs depuis Simplonline.
-2. **Récupère le canevas** dans ton repo perso au démarrage de M0 — tu l'enrichis
+2. **Garde [`00_competences_referentiels.md`](./00_competences_referentiels.md)
+   ouvert dès le démarrage** — il te dit où tu vas et quelles compétences tu
+   travailles à quel niveau.
+3. **Récupère le canvas** dans ton repo perso au démarrage de M0 — tu l'enrichis
    au fur et à mesure que les modules avancent (sections à ouvrir selon le module
    en cours).
-3. **Tiens le journal de bord** au quotidien : 1 entrée par jour de formation,
+4. **Tiens le journal de bord** au quotidien : 1 entrée par jour de formation,
    pas plus de 10 lignes — actions du jour, difficultés, prochain pas.
-4. **En M9** : fusion automatique des deux fichiers en un seul notebook certif
-   (le script de fusion est dans `ia-atos-parcours/scripts/merge_for_certif.py`).
+5. **En M9** : fusion automatique du canvas et du journal en un seul notebook
+   certif (le script de fusion est dans
+   `ia-atos-parcours/scripts/merge_for_certif.py`).
 
 ---
 
