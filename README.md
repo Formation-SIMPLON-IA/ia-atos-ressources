@@ -13,6 +13,8 @@ individuels avec leurs squelettes et mini-cours.
 | Fichier | Quand le mobiliser ? |
 |---|---|
 | [`00_competences_referentiels.md`](./00_competences_referentiels.md) | **Source de vérité des compétences** — 9 C techniques (CISIA) + 9 CT transversales (OPCO ATLAS) avec intitulés officiels, niveaux Simplon et mapping par module. À garder sous la main pendant tout le parcours. |
+| [`recap_M0_vers_M1.md`](./recap_M0_vers_M1.md) | **Pont entre M0 et M1** — cycle ML, technos vues vs à venir, compétences cochées. À lire entre vendredi soir M0 et mardi 9h M1. |
+| [`grille_decision_C4.md`](./grille_decision_C4.md) | **Grille de décision « quel modèle choisir »** — construite collectivement en restitution M4-B1, à enrichir au fil des modules. |
 | [`canvas-cas-usage-v2.ipynb`](./canvas-cas-usage-v2.ipynb) | **Trame du notebook certif M9** — à utiliser comme grille de référence dès M0, sections ouvertes module par module (cf. tableau « Mobilisation » à l'intérieur). |
 | [`matrice-notebook-initiale.ipynb`](./matrice-notebook-initiale.ipynb) | **Matrice initiale du notebook** — version brute distribuée en amont, à mettre en regard du canvas pour comprendre l'évolution attendue. |
 | [`journal-de-bord.ipynb`](./journal-de-bord.ipynb) | **Journal quotidien** à tenir au fil du parcours — sera fusionné avec le canvas en M9 (cf. `merge_for_certif.py` du repo `ia-atos-parcours`). |
