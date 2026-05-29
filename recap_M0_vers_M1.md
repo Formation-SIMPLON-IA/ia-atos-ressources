@@ -17,7 +17,7 @@ cartographie complète du parcours et de **ce que M0 a outillé**.
 flowchart TD
     BESOIN["🎯 Besoin métier"]
     BESOIN --> C1["1. Identifier les données<br/><i>C1 — Quelles sources ? Qualité ? RGPD ?</i>"]
-    C1 --> C3["2. Préparer les données<br/><i>C3 — Nettoyer, encoder, déséquilibrer"]
+    C1 --> C3["2. Préparer les données<br/><i>C3 — Nettoyer, encoder, normaliser</i>"]
     C3 --> C4["3. Choisir un modèle<br/><i>C4 — Linéaire vs arbre vs deep ?</i>"]
     C4 --> C5["4. Entraîner<br/><i>C5 — Fit, validation, hyperparams</i>"]
     C5 --> C6["5. Implémenter / packager<br/><i>C6 — joblib, API, conteneur</i>"]
@@ -30,13 +30,13 @@ flowchart TD
     classDef next fill:#fff4e1,stroke:#c97a00,stroke-width:2px,color:#000
     classDef later fill:#f0f0f0,stroke:#888,color:#444
     class C6 done
-    class C5,C6 next
+    class C5 next
     class C1,C3,C4,C7,C8,C9 later
 ```
 
 **Légende** :
-- 🟢 **vert** = déjà outillé en M0 (étape 5, en consommation)
-- 🟡 **orange** = qu'on muscle en M1 (étapes 4-5, on passe en production)
+- 🟢 **vert** = déjà outillé en M0 (étape 5 — palier C6 *imiter* puis *adapter*)
+- 🟡 **orange** = nouveau en M1 (étape 4 — démarrage C5 *imiter*, C6 progresse en parallèle)
 - ⚪ **gris** = à venir dans les modules suivants
 
 > 💡 **La grande bascule M0 → M1** : en M0 tu **consommais** un modèle
@@ -56,9 +56,9 @@ flowchart LR
     end
 
     subgraph MODEL["🧠 Modèle"]
-        M1[RandomForest<br/>scikit-learn pré-entraîné]
-        M2[CamemBERT<br/>HuggingFace pré-entraîné]
-        M3[Adaptation 5⭐ → 3 classes]
+        RF[RandomForest<br/>scikit-learn pré-entraîné]
+        CAM[CamemBERT<br/>HuggingFace pré-entraîné]
+        MAP[Adaptation 5⭐ → 3 classes]
     end
 
     subgraph API["🌐 Service HTTP"]
@@ -78,9 +78,10 @@ flowchart LR
         U1[Streamlit<br/>démo qualité]
     end
 
-    D1 --> M1
-    M1 --> A1
-    M2 --> M3 --> A1
+    D1 --> RF
+    D2 --> RF
+    RF --> A1
+    CAM --> MAP --> A1
     A1 --> A2
     A1 --> A3
     A1 --> A4
@@ -90,8 +91,8 @@ flowchart LR
 
     classDef m0b1 fill:#e1f5ff,stroke:#0277bd
     classDef m0b2 fill:#fff4e1,stroke:#c97a00
-    class D1,D2,M1,A1,A2,A3,A4,DEP1 m0b1
-    class M2,M3,DEP2,DEP3,U1 m0b2
+    class D1,D2,RF,A1,A2,A3,A4,DEP1 m0b1
+    class CAM,MAP,DEP2,DEP3,U1 m0b2
 ```
 
 **Légende** :
@@ -103,10 +104,10 @@ flowchart LR
 ```mermaid
 flowchart LR
     subgraph NEW["🆕 Nouveau en M1"]
-        N1[pandas / numpy<br/>EDA + sélection features]
+        N1[pandas / numpy<br/>EDA + contrôle qualité]
         N2[train_test_split<br/>+ holdout intact]
-        N3[F1 macro / ROC-AUC<br/>matrice de confusion]
         N4[entraînement RandomForest<br/>fit + class_weight]
+        N3[F1 macro / ROC-AUC<br/>matrice de confusion]
         N5[experiments.md<br/>traçabilité des runs]
         N6[Métadonnées JSON<br/>+ tag git sémantique]
     end
@@ -118,7 +119,7 @@ flowchart LR
         R4[Loguru]
     end
 
-    N1 --> N2 --> N3 --> N4 --> N5 --> N6
+    N1 --> N2 --> N4 --> N3 --> N5 --> N6
     N6 -.->|charge le modèle entraîné par toi| R1
 
     classDef new fill:#f5e1ff,stroke:#7a3fbf,stroke-width:2px
@@ -135,8 +136,8 @@ flowchart LR
 
 ## 3. Les compétences — où tu en es, où tu vas
 
-| # | Compétence (intitulé court) | M0-B1 | M0-B2 | **M1-B1** | **M1-B2** |
-|---|---|---|---|---|---|
+| Code | Compétence (intitulé court) | M0-B1 | M0-B2 | M1-B1 | M1-B2 |
+| --- | --- | --- | --- | --- | --- |
 | **C1** | Identifier les données | — | — | — | — |
 | **C2** | Identifier les risques éthiques | — | — | — | — |
 | **C3** | Préparer les données | — | — | — | — |
