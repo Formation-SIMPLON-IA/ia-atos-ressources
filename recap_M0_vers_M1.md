@@ -222,8 +222,8 @@ en RDV vendredi ou MP Discord avant mardi 9h.
 
 ## 7. Pour aller plus loin (optionnel, 30 min max)
 
-- **Le cycle ML en image** (article INRIA *Tech4Good*) — vue d'ensemble
-  schématique : <https://www.inria.fr/fr/le-cycle-de-vie-dun-projet-dia>
+- **Le cycle ML en image** (Google Developers — *ML development phases*) —
+  schéma 4 phases : <https://developers.google.com/machine-learning/managing-ml-projects/phases>
 - **scikit-learn — *Getting Started*** :
   <https://scikit-learn.org/stable/getting_started.html> — 10 min, juste
   pour voir la grammaire `fit / predict / score`.
