@@ -11,6 +11,10 @@ __pycache__/
 .ipynb_checkpoints/
 *.ipynb_checkpoints
 
+# Modèles produits par les notebooks (galerie de réentraînement) — régénérables
+models/
+*.joblib
+
 # IDE
 .vscode/
 .idea/
