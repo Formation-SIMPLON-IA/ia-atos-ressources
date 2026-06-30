@@ -30,16 +30,19 @@ flowchart TD
 
     classDef done fill:#d4f4dd,stroke:#1a7a3a,stroke-width:2px,color:#000
     classDef next fill:#fff4e1,stroke:#c97a00,stroke-width:2px,color:#000
+    classDef acquis fill:#dbeafe,stroke:#1e5fa8,stroke-width:2px,color:#000
     classDef later fill:#f0f0f0,stroke:#888,color:#444
     class C3 done
     class C1 next
-    class C4,C5,C6,C7,C8,C9 later
+    class C5,C6 acquis
+    class C4,C7,C8,C9 later
 ```
 
 **Légende** :
 - 🟢 **vert** = outillé en M2 (étape 2 — **C3 préparer**, paliers *imiter* puis *adapter*)
 - 🟡 **orange** = nouveau en M3 (étape 1 — **C1 identifier les données**, *imiter*)
-- ⚪ **gris** = déjà vu (C5 entraîner en M1, C6 implémenter en M0) **ou** à venir
+- 🔵 **bleu** = **déjà acquis** dans les modules passés (C5 entraîner en M1, C6 implémenter en M0-M1)
+- ⚪ **gris** = **à venir** dans les futurs modules (C4 en M4, C7 en M7, C8-C9 en M5-M6)
 - ↺ le cycle **n'est pas strictement linéaire** : en pratique on revient souvent
   en arrière (un audit de préparation C3 peut révéler qu'il **manque** des
   données → retour en C1). M3 te fait justement **remonter** de C3 vers C1.

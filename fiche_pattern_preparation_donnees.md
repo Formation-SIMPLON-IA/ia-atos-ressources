@@ -100,7 +100,7 @@ print("shape après préparation :", X_clean.shape)   # + de colonnes (one-hot)
 #   pipe = Pipeline([("prep", preprocessor), ("model", ...)]).fit(X, y)
 # Ici (M2 = C3 préparer), on s'arrête à la préparation — le modèle vient plus tard.
 
-# [6] Persister le pipeline (pas le DataFrame transformé)
+# [5] Persister le pipeline (fin de l'industrialisation — pas le DataFrame transformé)
 Path("src").mkdir(exist_ok=True)
 joblib.dump(preprocessor, "src/pipeline.joblib", compress=3)
 ```
@@ -114,7 +114,7 @@ joblib.dump(preprocessor, "src/pipeline.joblib", compress=3)
 | Le dataset | L'étape [1] — `pd.read_csv("mon_fichier.csv")` et les 3 listes NUM / ORD / CAT |
 | La stratégie d'imputation | L'étape [4] — `SimpleImputer(strategy="mean"/"median"/"most_frequent")` ou `KNNImputer()` |
 | L'encodage d'une variable | Déplace-la entre les listes ORD (ordonnée) et CAT (non ordonnée) |
-| Ajouter / retirer une variable | L'étape [6]/[adapter] — déplace-la dans/hors la bonne liste, re-`fit`, vérifie la nouvelle shape |
+| Ajouter / retirer une variable | L'étape [6] **adapter** — déplace-la dans/hors la bonne liste (NUM/ORD/CAT, définies au bloc `[4]+[5]`), re-`fit`, vérifie la nouvelle shape |
 
 ---
 
