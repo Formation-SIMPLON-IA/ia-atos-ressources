@@ -1,12 +1,17 @@
 # Grille de décision C4 — Choisir un modèle IA
 
 > **Livrable pédagogique majeur du parcours ATOS.**
-> Construit collectivement en restitution **M4-B1** (mercredi midi), puis
-> enrichi à chaque module (M4-B2, M7-B1, M7-B2, M8-B1).
-> Réutilisé pour le **notebook certif M9**.
+> **Amorce** posée par la formatrice (Axes 1-2). Les **Axes 3-4, la cartographie
+> et les cas types se construisent COLLECTIVEMENT** en restitution **M4-B1**
+> (mercredi midi), à partir de vos benchmarks et de vos *decision cards*.
+> Ensuite enrichie à chaque module (M4-B2, M7-B1, M7-B2, M8-B1), puis
+> réutilisée pour le **notebook certif M9**.
 >
-> **Statut** : version initiale (à compléter en cours de promo selon les
-> arbitrages collectifs).
+> **Statut** : 🔨 **amorce à compléter** — les zones marquées *« à construire
+> en restitution »* sont vides **exprès**. C'est vous qui les remplissez.
+>
+> 📦 **Compagnon** : pour la décision **en amont** (où/comment stocker les
+> données), voir [`grille_decision_stockage.md`](grille_decision_stockage.md).
 
 ---
 
@@ -22,13 +27,14 @@ donne une **première lecture** structurée selon 4 axes :
 
 **Important** : la grille n'est **pas un oracle**. C'est un **support
 de raisonnement** : tu te poses chaque axe, tu **justifies** ton choix
-dans ton notebook (M4, M7, M8, certif).
+dans ton notebook (M4, M7, M8, certif). Une case ne dit jamais *« le
+meilleur modèle »* mais *« le meilleur SI tel critère prime »*.
 
 ---
 
-## 📊 La grille (version initiale, à enrichir)
+## 📊 La grille
 
-### Axe 1 — Volume de données
+### Axe 1 — Volume de données · *amorce à challenger*
 
 | Volume | Familles candidates |
 |---|---|
@@ -37,7 +43,7 @@ dans ton notebook (M4, M7, M8, certif).
 | **> 100 k** | Boosting tuné, Réseau de neurones, Transfer learning, Foundation model fine-tuné |
 | **> 1 M** | Deep learning (custom), Transformers, distillation possible |
 
-### Axe 2 — Complexité du signal
+### Axe 2 — Complexité du signal · *amorce à challenger*
 
 | Complexité | Familles candidates |
 |---|---|
@@ -46,86 +52,89 @@ dans ton notebook (M4, M7, M8, certif).
 | **Non-linéaire forte** (interactions complexes) | Boosting tuné, Réseau de neurones |
 | **Structurel** (image, texte, séquence) | CNN, Transformer, Transfer, Foundation model |
 
-### Axe 3 — Contraintes métier
+### Axe 3 — Contraintes métier · 🔨 *à construire en restitution*
+
+> On remplit cet axe **ensemble**, à partir des contraintes de vos *decision
+> cards* et de vos **mesures réelles** de M4-B1 (temps d'inférence, temps de
+> train, explicabilité constatée). Une ligne d'exemple est donnée par
+> sous-tableau ; **complétez les autres**.
 
 #### Explicabilité
 
 | Besoin | Familles privilégiées |
 |---|---|
 | **Décision réglementaire** (crédit, santé, RH) | Linéaire, Arbre simple (lisible) |
-| **Confort utilisateur** (peut être complexe) | Random Forest + SHAP, Boosting + SHAP |
-| **Boîte noire acceptable** | Réseau de neurones, Transfer learning, Foundation model |
+| **Confort utilisateur** (peut être complexe) | *(à remplir)* |
+| **Boîte noire acceptable** | *(à remplir)* |
 
 #### Latence d'inférence
 
 | Contrainte | Familles privilégiées |
 |---|---|
-| **< 10 ms** (temps réel critique) | Linéaire, Arbre simple, RF distillée |
-| **10 ms - 100 ms** | RF, Boosting, CNN léger, Transfer fine-tuné |
-| **100 ms - 1 s** | Tous (y compris LLM API rapides) |
-| **> 1 s acceptable** | Foundation model (CLIP zero-shot, LLM via API) |
+| **< 10 ms** (temps réel critique) | *(à remplir — vos mesures ms/1k éch.)* |
+| **10 ms - 100 ms** | *(à remplir)* |
+| **100 ms - 1 s** | *(à remplir)* |
+| **> 1 s acceptable** | *(à remplir)* |
 
-#### Coût
+#### Coût / sobriété
 
 | Budget | Familles privilégiées |
 |---|---|
-| **Train < 1 € / Inférence quasi nulle** | Linéaire, RF, Boosting léger |
-| **Train < 100 € / Inférence < 0.01 € req** | Boosting tuné, Transfer learning, CNN léger |
-| **Train < 10 000 € / Inférence < 1 € / req** | Fine-tuning foundation model, ViT, BERT |
-| **API par requête** | LLM via API (GPT, Claude, Mistral, Gemini) |
+| **Train quasi nul / Inférence quasi nulle** | *(à remplir)* |
+| **Train modéré / Inférence faible** | *(à remplir)* |
+| **Train lourd (GPU) / Inférence coûteuse** | *(à remplir)* |
+| **API par requête** | *(à remplir)* |
 
-### Axe 4 — Maintenance attendue
+> 💡 Si une dimension vous manque ici (empreinte carbone, RGPD, explicabilité
+> réglementaire ACPR, time-to-market…), **ajoutez-la** : c'est le geste attendu.
+
+### Axe 4 — Maintenance attendue · 🔨 *à construire en restitution*
 
 | Fréquence réentraînement | Familles privilégiées |
 |---|---|
 | **Jamais** (modèle statique) | Linéaire, Foundation model zero-shot |
-| **Trimestrielle** (drift modéré) | RF, Boosting (CI/CD M5 OK) |
-| **Mensuelle** (drift fort) | Boosting + MLOps complet (M5+M6) |
-| **Continu / online** | Réseau de neurones avec partial_fit, ou re-fine-tuning programmé |
+| **Trimestrielle** (drift modéré) | *(à remplir)* |
+| **Mensuelle** (drift fort) | *(à remplir — lien MLOps M5/M6)* |
+| **Continu / online** | *(à remplir)* |
 
 ---
 
-## 🗺️ Cartographie des modèles par contexte
+## 🗺️ Cartographie des modèles par contexte · 🔨 *à qualifier ensemble*
+
+> Tableau à **remplir en restitution** à partir de vos benchmarks M4-B1 et de la
+> grille ci-dessus. Une ligne est donnée en exemple.
 
 | Modèle | Volume idéal | Explicabilité | Latence | Train rapide |
 |---|---|---|---|---|
 | **LinearRegression / Ridge** | < 100 k | ✅✅✅ | < 1 ms | ✅✅✅ |
-| **RandomForest** | 1 k - 1 M | ✅ (SHAP requis) | 1-10 ms | ✅✅ |
-| **HistGradientBoosting** | 1 k - 1 M | ✅ (SHAP requis) | 1-5 ms | ✅✅✅ |
-| **CNN from scratch** | > 10 k (images) | ❌ (sauf Grad-CAM) | 10-50 ms | 🟡 |
-| **Transfer learning (ResNet, ViT)** | 100+ (images) | ❌ (sauf Grad-CAM) | 50-200 ms | ✅ |
-| **Zero-shot CLIP** | 0 (no train) | ❌ | 80-200 ms | ✅✅✅ (no train) |
-| **LLM via API** | 0 (no train) | ❌ | 500 ms - 5 s | ✅✅✅ (no train) |
-| **Réseau profond custom** | > 1 M | ❌ | 50 ms - 1 s | ❌ |
+| **RandomForest** | *(à remplir)* | *(à remplir)* | *(à remplir)* | *(à remplir)* |
+| **HistGradientBoosting** | *(à remplir)* | *(à remplir)* | *(à remplir)* | *(à remplir)* |
+| **CNN from scratch** | *(à compléter en M4-B2)* | | | |
+| **Transfer learning (ResNet, ViT)** | *(à compléter en M4-B2)* | | | |
+| **Zero-shot CLIP** | *(à compléter en M4-B2)* | | | |
+| **LLM via API** | *(à compléter en M7)* | | | |
 
 ---
 
-## 💼 Cas types pédagogiques (issus du parcours)
+## 💼 Cas types pédagogiques · 🔨 *construits au fil du parcours*
 
-### Cas M1 / M4-B1 (Bike Sharing — régression saisonnière, ~17 k lignes)
+> Chaque cas = un besoin réel placé sur les 4 axes + le verdict chiffré. On
+> construit le **premier ensemble** en restitution M4-B1.
 
-- **Volume** : 1 k - 100 k → axe 1 = boosting envisageable
-- **Complexité** : non-linéaire faible (interactions saison × heure) → axe 2 = ensemble
-- **Explicabilité** : moyenne (actuaire OK avec SHAP) → axe 3 = RF + SHAP
-- **Latence** : pas critique → axe 3 OK pour tout
-- **Maintenance** : trimestrielle (drift saisonnier modéré) → axe 4 OK
-- **Verdict type** : **HistGradientBoostingRegressor** (rapide + précis) ou
-  RandomForest si explicabilité prime
+### Cas M4-B1 (Bike Sharing — régression saisonnière, ~17 k lignes) · *à construire*
 
-### Cas M4-B2 (PCB Defect — vision industrielle, ~2 k images)
+- **Volume** : *(à placer)*
+- **Complexité** : *(à placer)*
+- **Explicabilité** : *(à placer)*
+- **Latence** : *(à placer)*
+- **Maintenance** : *(à placer)*
+- **Verdict type de la promo** : *(à trancher collectivement — avec le chiffre)*
 
-- **Volume** : 1 k - 100 k images → transfer learning ou zero-shot
-- **Complexité** : structurel (image) → CNN, ViT, CLIP
-- **Explicabilité** : limitée acceptable (TechniMatic OK avec Grad-CAM)
-- **Latence** : 100 ms acceptable (contrôle qualité offline) → tout OK
-- **Maintenance** : si nouveaux défauts apparaissent, réentraîner → CI/CD M5
-- **Verdict type** :
-  - **Transfer learning (ResNet-18)** si **labels disponibles**
-  - **Zero-shot CLIP** si **MVP rapide sans labels**
+### Cas M4-B2 (PCB Defect — vision industrielle) · *à construire après M4-B2*
 
-### Cas M7-B1 / B2 (MediVox — santé) — *à compléter en M7*
+### Cas M7 (santé) · *à compléter en M7*
 
-### Cas M8 (4 cas tirés) — *à compléter en M8*
+### Cas M8 (cas tirés) · *à compléter en M8*
 
 ---
 
@@ -145,17 +154,18 @@ Pour chaque nouveau besoin métier :
 
 ## 🔁 Évolution de la grille
 
-| Version | Date | Modifications | Auteur·rice |
+| Version | Semaine | Modifications | Auteur·rice |
 |---|---|---|---|
-| v1.0 | 2026-?? (semaine M4) | Construction initiale en restitution M4-B1 | Promo ATOS G1 |
-| v1.1 | 2026-?? (semaine M4 fin) | Ajout cas vision PCB après M4-B2 | Promo ATOS G1 |
-| v2.0 | 2026-?? (semaine M7) | Ajout familles foundation models / LLM / RAG | Promo ATOS G1 |
-| v2.1 | 2026-?? (semaine M8) | Ajout cas par tirage | Promo ATOS G1 |
+| amorce | M4 (avant restit.) | Axes 1-2 posés, reste à trous | Marianne (formatrice) |
+| v1.0 | M4 (restit. B1) | Axes 3-4 + cartographie + cas Bike Sharing construits collectivement | Promo ATOS G1 |
+| v1.1 | M4 (fin) | Ajout cas vision PCB après M4-B2 | Promo ATOS G1 |
+| v2.0 | M7 | Ajout familles foundation models / LLM / RAG | Promo ATOS G1 |
+| v2.1 | M8 | Ajout cas par tirage | Promo ATOS G1 |
 | v3.0 | À voir | Consolidation finale | — |
 
 > 💡 **La grille n'est jamais terminée.** Chaque cas nouveau enrichit
-> notre lecture. Cette version v1.0 est **construite collectivement en
-> mercredi M4-B1** avec la promo — pas par la formatrice seule.
+> notre lecture. La **v1.0 se construit collectivement** en mercredi M4-B1 —
+> pas par la formatrice seule.
 
 ---
 
@@ -170,6 +180,6 @@ Pour chaque nouveau besoin métier :
 
 ---
 
-*Grille pédagogique ATOS — co-construite avec la promo. Version v1.0
-initiale par Marianne Arrué (formatrice), 2026-05-26. À enrichir à chaque
-restitution.*
+*Grille pédagogique ATOS — co-construite avec la promo. Amorce Axes 1-2 par
+Marianne Arrué (formatrice) ; Axes 3-4, cartographie et cas types construits en
+restitution M4-B1 avec la promo G1.*
