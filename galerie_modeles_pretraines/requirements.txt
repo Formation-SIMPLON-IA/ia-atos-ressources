@@ -1,0 +1,9 @@
+# Galerie modèles pré-entraînés — dépendances (CPU, validées sous transformers 5.10 / torch 2.12)
+transformers>=4.40
+torch>=2.2
+sentence-transformers>=3.0
+scikit-learn>=1.4
+pandas>=2.0
+# Requis par le notebook 02 (tokenizer SentencePiece du modèle zero-shot multilingue) :
+sentencepiece>=0.2
+protobuf>=4.0

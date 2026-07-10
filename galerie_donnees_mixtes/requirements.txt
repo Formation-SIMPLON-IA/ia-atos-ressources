@@ -1,0 +1,8 @@
+pandas>=2.0
+scikit-learn>=1.4
+matplotlib>=3.7
+joblib>=1.3
+jupyter
+# pour le notebook 04 (macOS : d'abord `brew install libomp`)
+xgboost>=2.0
+lightgbm>=4.0
