@@ -43,6 +43,7 @@
 - **Concept drift** `[M6]` — la **relation** entre features et cible change (ce qui prédisait un défaut hier ne le prédit plus). À distinguer du data drift.
 - **Conteneur / Docker** `[M0/M5]` — empaqueter une application + ses dépendances pour qu'elle tourne pareil partout. `docker-compose` orchestre plusieurs conteneurs.
 - **Contract test (modèle)** `[M5]` — test qui vérifie qu'un modèle respecte un contrat (mêmes colonnes en entrée, sortie déterministe) avant déploiement.
+- **Contrat de données (data contract)** `[M3]` — spécification des colonnes, types et contraintes qu'un pipeline doit livrer en sortie ; le pipeline est conforme quand il **honore le contrat**, pas seulement quand il tourne.
 - **Coût d'inférence** `[M7]` — coût (latence, mémoire, €) de **chaque prédiction** en production, multiplié par le volume. Souvent sous-estimé pour les LLM.
 
 ## D
@@ -53,6 +54,7 @@
 - **Déploiement** `[M5]` — mettre un modèle en service (conteneur, API) accessible et surveillé en production.
 - **Disparate impact** 🎓 `[M2/M7]` — ratio de taux positif entre groupe défavorisé et favorisé. Règle des 4/5 : < 0.80 = signal de biais.
 - **Distillation / modèle distillé** `[M7]` — version compressée d'un modèle (ex. `distilbert`), presque aussi performante pour une fraction du coût. Argument de sobriété.
+- **Données semi-structurées** `[M3]` — données à structure souple sans schéma tabulaire strict (JSON, XML, logs) ; entre le structuré (table) et le non structuré (texte libre).
 - **Drift (dérive)** `[M6]` — dégradation des performances d'un modèle en production, par data drift ou concept drift.
 
 ## E
@@ -96,8 +98,10 @@
 ## L — M
 
 - **Latence** `[M5]` — temps de réponse d'une prédiction (souvent mesurée en p50/p95). Contrainte clé en production et dans l'arbitrage de sobriété.
+- **Lineage (traçabilité de la donnée)** `[M3]` — tracer l'origine et le parcours d'une donnée (source → transformations → usage) pour savoir d'où elle vient et ce qu'elle a subi.
 - **LLM (Large Language Model)** `[M7]` — grand modèle de langage généraliste (GPT-4, Mistral, Llama). Puissant, coûteux, opaque.
 - **MAE / RMSE** 🎓 `[M4]` — erreurs moyennes en régression (MAE = écart moyen absolu ; RMSE pénalise plus les grosses erreurs).
+- **Métadonnée** `[M0/M3]` — donnée qui **décrit** une autre donnée (type, source, date, unité, fraîcheur) ; le catalogue de ce qu'on manipule.
 - **MLflow** `[M5]` — outil de **tracking** d'expériences : historiser versions, hyperparamètres et métriques pour comparer les runs. N'est pas un détecteur de drift.
 - **MLOps** `[M5]` — pratiques d'industrialisation du ML (CI/CD, monitoring, versionning, réentraînement) ; le DevOps appliqué aux modèles.
 - **Model card** `[M7]` — fiche d'identité d'un modèle (tâche, données, limites, biais, métriques). À lire avant d'adopter un modèle.
@@ -107,8 +111,10 @@
 ## N — O — P
 
 - **NER (Named Entity Recognition)** `[M2]` — repérer des entités (noms, lieux, n° de sécu) dans du texte ; utile pour la pseudonymisation.
+- **ORM (Object-Relational Mapping)** `[M3]` — mapper des tables SQL sur des classes Python (ex. **SQLAlchemy**) pour manipuler la BDD en objets, sans écrire de SQL brut.
 - **Overfitting (surapprentissage)** 🎓 `[M4]` — le modèle mémorise le jeu d'entraînement et généralise mal sur des données nouvelles.
 - **Paramètre** `[M1]` — valeur interne **apprise** pendant l'entraînement (poids, seuils). ≠ hyperparamètre.
+- **Parquet** `[M2/M3]` — format de stockage **par colonne** : compact, typage préservé, lecture sélective de colonnes ; ≠ CSV (texte, par ligne, types perdus). Choix de stockage à justifier, pas par défaut.
 - **Pipeline (scikit-learn)** `[M2]` — enchaînement reproductible de prétraitements + modèle, en un seul objet persistable.
 - **Précision (precision)** 🎓 `[M1]` — parmi les cas prédits positifs, combien le sont vraiment.
 - **Prometheus** `[M5]` — outil qui **collecte** les métriques exposées par un service (`/metrics`) pour le monitoring (visualisées dans Grafana).
@@ -124,6 +130,7 @@
 - **Rappel (recall)** 🎓 `[M1]` — parmi les vrais positifs, combien le modèle en retrouve. Crucial quand rater un positif coûte cher (fraude, panne).
 - **Réentraînement (retraining)** `[M6]` — réentraîner un modèle sur des données plus récentes, déclenché sur un **seuil** (dérive mesurée ou volume de feedback).
 - **Régression** 🎓 `[M4]` — prédire une **valeur continue** (prix, durée), par opposition à la classification.
+- **Réidentification (par croisement)** 🎓 `[M3]` — retrouver une personne en **croisant** plusieurs champs anodins pris isolément (le risque naît du croisement, pas de la colonne seule). Cœur de l'audit RGPD multi-sources (C2 N2).
 - **RGPD** 🎓 `[M2]` — règlement européen sur les données personnelles (base légale, minimisation, art. 9 données sensibles, art. 22 décision automatisée).
 - **ROC-AUC** 🎓 `[M1]` — mesure la capacité d'un modèle à séparer les classes, indépendamment du seuil.
 - **Rollback** `[M5]` — revenir à la version précédente d'un service/modèle après un incident. Procédure clé du runbook.
@@ -146,11 +153,3 @@
 - **Vector store** `[M7]` — base indexant des embeddings pour la recherche par similarité (ChromaDB, FAISS).
 - **Versionner (un modèle)** `[M5]` — tracer chaque version du modèle (poids + params + métriques) pour comparer et revenir en arrière (tag git, MLflow).
 - **Zero-shot** `[M4/M8]` — faire exécuter une tâche par un modèle **sans aucun exemple** d'entraînement.
-
----
-
-## Comment l'enrichir (note formatrice, à retirer avant diffusion si besoin)
-
-À chaque module, ajouter les 3-5 termes nouveaux du brief, avec leur tag `[Mx]` et le
-🎓 si le terme est dans le périmètre questionnaire C1/C2/C4. Garder 1-2 lignes max par
-terme — ce glossaire est un **repère rapide**, pas un cours.
