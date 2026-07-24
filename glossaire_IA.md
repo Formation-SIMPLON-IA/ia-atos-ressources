@@ -112,6 +112,7 @@
 
 - **NER (Named Entity Recognition)** `[M2]` — repérer des entités (noms, lieux, n° de sécu) dans du texte ; utile pour la pseudonymisation.
 - **ORM (Object-Relational Mapping)** `[M3]` — mapper des tables SQL sur des classes Python (ex. **SQLAlchemy**) pour manipuler la BDD en objets, sans écrire de SQL brut.
+- **Outliers (valeurs aberrantes)** `[M2/M3]` — valeurs très éloignées du reste des données : soit un **vrai extrême** à conserver, soit une **erreur de mesure** (capteur défaillant, saisie) à signaler. Une valeur aberrante n'est **pas forcément un signal** (cf. « anomalie ≠ signal ») — à repérer en EDA (boxplot, écart-type, `describe`), pas à supprimer par réflexe.
 - **Overfitting (surapprentissage)** 🎓 `[M4]` — le modèle mémorise le jeu d'entraînement et généralise mal sur des données nouvelles.
 - **Paramètre** `[M1]` — valeur interne **apprise** pendant l'entraînement (poids, seuils). ≠ hyperparamètre.
 - **Parquet** `[M2/M3]` — format de stockage **par colonne** : compact, typage préservé, lecture sélective de colonnes ; ≠ CSV (texte, par ligne, types perdus). Choix de stockage à justifier, pas par défaut.
