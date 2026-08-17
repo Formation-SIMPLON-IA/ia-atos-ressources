@@ -44,6 +44,7 @@
 - **Conteneur / Docker** `[M0/M5]` — empaqueter une application + ses dépendances pour qu'elle tourne pareil partout. `docker-compose` orchestre plusieurs conteneurs.
 - **Contract test (modèle)** `[M5]` — test qui vérifie qu'un modèle respecte un contrat (mêmes colonnes en entrée, sortie déterministe) avant déploiement.
 - **Contrat de données (data contract)** `[M3]` — spécification des colonnes, types et contraintes qu'un pipeline doit livrer en sortie ; le pipeline est conforme quand il **honore le contrat**, pas seulement quand il tourne.
+- **Courbe d'apprentissage (learning curve)** `[M4]` — courbe du score (train et validation) en fonction de la **quantité de données** d'entraînement. Sert à répondre à « plus de données m'aiderait-il ? » : les deux courbes qui se rejoignent bas = sous-apprentissage (changer de modèle), un écart qui persiste = surapprentissage (plus de données ou régularisation). ≠ courbe de validation, qui fait varier un hyperparamètre.
 - **Coût d'inférence** `[M7]` — coût (latence, mémoire, €) de **chaque prédiction** en production, multiplié par le volume. Souvent sous-estimé pour les LLM.
 
 ## D
@@ -83,6 +84,7 @@
 - **Haut risque (AI Act)** `[M7]` — catégorie de l'AI Act (Annexe III : santé, justice, emploi…) imposant transparence, traçabilité et supervision humaine.
 - **Healthcheck** `[M5]` — endpoint (`/health`) indiquant si un service est vivant ; utilisé par docker-compose et le monitoring.
 - **HITL (Human-in-the-loop)** `[M7]` — un humain valide ou tranche les cas incertains. Répond aux exigences de supervision de l'AI Act.
+- **Holdout (jeu de test final)** 🎓 `[M1]` — part des données mise de côté **avant** toute exploration et modélisation, ouverte **une seule fois** à la fin pour estimer la performance réelle. La validation croisée sert à *choisir* ; le holdout sert à *annoncer un chiffre*. Chaque décision prise en regardant le holdout entame sa neutralité.
 - **HuggingFace** `[M4]` — plateforme partageant des modèles pré-entraînés (« le GitHub des modèles »). cf. [`panorama_huggingface_hub.md`](./panorama_huggingface_hub.md).
 - **Hyperparamètre** `[M1/M4]` — réglage choisi **avant** l'entraînement (nombre d'arbres, profondeur) ; ≠ paramètre, appris pendant.
 
@@ -116,6 +118,7 @@
 - **Overfitting (surapprentissage)** 🎓 `[M4]` — le modèle mémorise le jeu d'entraînement et généralise mal sur des données nouvelles.
 - **Paramètre** `[M1]` — valeur interne **apprise** pendant l'entraînement (poids, seuils). ≠ hyperparamètre.
 - **Parquet** `[M2/M3]` — format de stockage **par colonne** : compact, typage préservé, lecture sélective de colonnes ; ≠ CSV (texte, par ligne, types perdus). Choix de stockage à justifier, pas par défaut.
+- **PII (Personally Identifiable Information)** 🎓 `[M0/M2]` — donnée personnelle identifiante : directe (nom, e-mail, NIR, téléphone) ou indirecte par croisement (code postal + âge + métier). Ne doit ni sortir dans les logs (cf. M0-B1) ni entrer dans un modèle sans base légale (cf. M2-B2).
 - **Pipeline (scikit-learn)** `[M2]` — enchaînement reproductible de prétraitements + modèle, en un seul objet persistable.
 - **Précision (precision)** 🎓 `[M1]` — parmi les cas prédits positifs, combien le sont vraiment.
 - **Prometheus** `[M5]` — outil qui **collecte** les métriques exposées par un service (`/metrics`) pour le monitoring (visualisées dans Grafana).
