@@ -78,6 +78,7 @@
 ## G — H
 
 - **GenAI** `[M7]` — IA générative : modèles qui génèrent du contenu (texte, image) plutôt que de prédire une classe/valeur.
+- **Golden run (jeu de référence gelé)** `[M5/M6]` — exécution de référence sur un jeu **figé** : tout garde-fou compare au golden run, jamais à la métrique holdout annoncée. Sert de base aux tolérances (≥ 2 σ).
 - **GHCR / registry d'images** `[M5]` — registre où la CI/CD stocke les images Docker construites (GitHub Container Registry).
 - **Grafana** `[M5]` — outil de **dashboards** pour visualiser les métriques de monitoring (alimenté par Prometheus). On construit son dashboard, on n'en importe pas un tout fait.
 - **Hallucination** `[M7]` — un LLM affirme avec aplomb une information fausse ; le RAG et l'abstention la réduisent (sans la supprimer).
@@ -90,6 +91,7 @@
 
 ## I — J — K
 
+- **Injection (de prompt), directe / indirecte** `[M8]` — instruction malveillante glissée dans l'entrée d'un LLM (directe) ou dans un document qu'un RAG ingère (indirecte). Se traite à l'**architecture** : sources contrôlées, moindre privilège, génération qui cite sans agir.
 - **Idempotent** `[M3]` — une opération qu'on peut relancer sans effet de bord (ré-ingérer un fichier ne duplique pas les lignes).
 - **Imputation** `[M2]` — remplacer les valeurs manquantes (par la moyenne, la médiane, la modalité la plus fréquente…).
 - **Indicateur business (KPI)** 🎓 `[M8]` — mesure chiffrée du gain métier (temps gagné, € économisés) ; ≠ **métrique modèle** (F1, RMSE), qui en est le moyen.
