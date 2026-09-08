@@ -43,7 +43,7 @@
 
 ---
 
-### Les 4 invariants à mémoriser
+### Les 6 invariants à mémoriser
 
 1. **On documente les biais, on ne les corrige pas (à ce stade).** Détecter, chiffrer, alerter le client. La mitigation viendra plus tard (M7).
 2. **On industrialise dans un Pipeline, pas en Pandas éparpillé.** Un `ColumnTransformer` + `Pipeline` est réutilisable, persistable, testable — des `df["x"] = ...` dispersés ne le sont pas.

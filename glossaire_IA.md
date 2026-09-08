@@ -61,6 +61,8 @@
 ## E
 
 - **EDA** 🎓 `[M2/M4]` — Exploratory Data Analysis : explorer les données (distributions, manquants, corrélations) avant de modéliser.
+- **Explicabilité — locale / globale** 🎓 `[M6]` — une explication **locale** dit pourquoi *ce* dossier a reçu *cette* prédiction (ce qu'exige un client, un juriste) ; une explication **globale** dit sur quoi le modèle s'appuie *en général* (ce qu'on met dans une note de conception). Les deux ne se déduisent pas l'une de l'autre.
+- **Explicabilité — par construction / post-hoc** 🎓 `[M6]` — un modèle linéaire ou un arbre court **est** son explication (par construction) ; sur un modèle opaque on applique **après coup** une méthode d'approximation (SHAP, LIME). Choisir un modèle interprétable, c'est éviter d'avoir à l'expliquer.
 - **Embedding** `[M4/M7]` — représentation vectorielle d'un texte/image ; deux objets proches de sens ont des vecteurs proches. Base du RAG et de la recherche par similarité.
 - **Epoch** `[M4]` — un passage complet sur tout le jeu d'entraînement (surtout en deep learning).
 - **Évaluation continue** `[M5]` — re-mesurer les métriques du modèle sur un **jeu de référence** à chaque release ; **bloque la mise en prod** si dégradation au-delà d'un seuil.
@@ -95,6 +97,7 @@
 - **Idempotent** `[M3]` — une opération qu'on peut relancer sans effet de bord (ré-ingérer un fichier ne duplique pas les lignes).
 - **Imputation** `[M2]` — remplacer les valeurs manquantes (par la moyenne, la médiane, la modalité la plus fréquente…).
 - **Indicateur business (KPI)** 🎓 `[M8]` — mesure chiffrée du gain métier (temps gagné, € économisés) ; ≠ **métrique modèle** (F1, RMSE), qui en est le moyen.
+- **Importance par permutation** `[M6]` — mesure l'importance d'une variable en **mélangeant sa colonne** et en observant la chute de la métrique sur le jeu de test. À préférer à `feature_importances_` (importance par impureté), qui gonfle artificiellement les variables à nombreuses valeurs distinctes — identifiants compris.
 - **Inférence** 🎓 `[M1]` — utiliser un modèle entraîné pour prédire (`model.predict`), par opposition à l'entraînement.
 - **Jeu de référence** `[M5]` — échantillon stable servant à re-mesurer la performance du modèle release après release (évaluation continue).
 - **KS (test de Kolmogorov-Smirnov)** `[M6]` — test statistique comparant deux distributions ; sert à détecter le data drift sur features numériques.
@@ -117,6 +120,7 @@
 - **NER (Named Entity Recognition)** `[M2]` — repérer des entités (noms, lieux, n° de sécu) dans du texte ; utile pour la pseudonymisation.
 - **ORM (Object-Relational Mapping)** `[M3]` — mapper des tables SQL sur des classes Python (ex. **SQLAlchemy**) pour manipuler la BDD en objets, sans écrire de SQL brut.
 - **Outliers (valeurs aberrantes)** `[M2/M3]` — valeurs très éloignées du reste des données : soit un **vrai extrême** à conserver, soit une **erreur de mesure** (capteur défaillant, saisie) à signaler. Une valeur aberrante n'est **pas forcément un signal** (cf. « anomalie ≠ signal ») — à repérer en EDA (boxplot, écart-type, `describe`), pas à supprimer par réflexe.
+- **Proxy (variable proxy)** 🎓 `[M6]` — variable anodine qui **reconstruit** un attribut sensible qu'on n'a pas donné au modèle (ex. une interruption de carrière qui trahit le sexe). Retirer la colonne sensible ne suffit donc pas : il faut croiser les contributions du modèle avec l'attribut sensible pour le débusquer.
 - **Overfitting (surapprentissage)** 🎓 `[M4]` — le modèle mémorise le jeu d'entraînement et généralise mal sur des données nouvelles.
 - **Paramètre** `[M1]` — valeur interne **apprise** pendant l'entraînement (poids, seuils). ≠ hyperparamètre.
 - **Parquet** `[M2/M3]` — format de stockage **par colonne** : compact, typage préservé, lecture sélective de colonnes ; ≠ CSV (texte, par ligne, types perdus). Choix de stockage à justifier, pas par défaut.
@@ -148,6 +152,7 @@
 - **SLM (Small Language Model)** `[M8]` — petit modèle de langage (1-3B), souvent suffisant et exécutable en local.
 - **Sobriété** `[transverse]` — choisir la solution la plus simple/légère qui résout le besoin ; garde-fou central du parcours contre le sur-engineering.
 - **SPOF (Single Point of Failure)** `[M7]` — composant unique dont la panne arrête tout le système (ex. modèle sur une seule machine). Risque d'architecture.
+- **SHAP (valeurs de Shapley)** 🎓 `[M6]` — méthode d'explication post-hoc qui répartit l'écart entre la prédiction moyenne et la prédiction d'un dossier entre les variables. Propriété clé : **additivité** (valeur de base + contributions = prédiction exacte). `TreeExplainer` est exact et rapide sur les modèles à arbres.
 - **Split (train/test)** 🎓 `[M1]` — séparer les données pour entraîner d'un côté, évaluer de l'autre. Temporel si l'ordre du temps compte.
 - **Token** `[M7]` — unité de texte (≈ ¾ d'un mot) ; les LLM facturent au token (l'output coûte souvent plus que l'input).
 - **Transfer learning** `[M4]` — réutiliser un modèle pré-entraîné en n'ajustant que ses dernières couches sur sa tâche.

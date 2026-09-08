@@ -45,7 +45,7 @@ Quatre motifs légitimes — chacun avec sa technique :
 ## 2. Exemple minimal — SMOTE
 
 ```python
-# pip install imbalanced-learn   (testé : imblearn 0.14, scikit-learn 1.9)
+# pip install imbalanced-learn   (testé : imbalanced-learn 0.13, scikit-learn 1.6)
 from collections import Counter
 from sklearn.datasets import make_classification
 from sklearn.model_selection import train_test_split

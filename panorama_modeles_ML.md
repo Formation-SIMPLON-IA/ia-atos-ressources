@@ -237,8 +237,9 @@ de ce qu'on rencontre dans le parcours :
 - **LLM** (Large Language Models) : GPT, Claude, Llama, Mistral. Modèles
   pré-entraînés sur des téraoctets de texte, mobilisables en *zero-shot*,
   *few-shot* ou *fine-tuning*.
-- **SLM** (Small Language Models) : versions distillées (DistilBERT,
-  Phi-3, Mistral 7B). Compromis perf/coût/sobriété.
+- **SLM** (Small Language Models, ~1-3B) : petits modèles distillés ou
+  compacts (DistilBERT, TinyLlama, Phi-3-mini, Qwen 1.5B). Compromis
+  perf/coût/sobriété. (À partir de ~7B on parle de LLM.)
 
 ### Foundation models et transfer learning
 
