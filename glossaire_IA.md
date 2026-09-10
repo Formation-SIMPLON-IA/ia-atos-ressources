@@ -10,7 +10,7 @@
 > parcours. Les termes utiles au **questionnaire certif** (C1/C2/C4) sont marqués 🎓.
 >
 > Ce fichier **grossit module après module** : si un terme te manque, signale-le,
-> on l'ajoute. *(Couverture actuelle : M0 → M8.)*
+> on l'ajoute. *(Couverture actuelle : M0 → M8 — dernière passe : M6, septembre 2026.)*
 
 ---
 
@@ -30,12 +30,14 @@
 - **Baseline** 🎓 `[M1/M4]` — modèle de référence simple auquel on compare les autres. Deux planchers utiles : le `DummyClassifier` (plancher absolu) et un modèle simple bien réglé.
 - **Biais (éthique)** 🎓 `[M2]` — traitement systématiquement défavorable d'un groupe ; se mesure (ex. disparate impact), se documente, parfois se corrige.
 - **Biais / variance** `[M4]` — un modèle trop simple sous-apprend (biais élevé), trop complexe sur-apprend (variance élevée). Compromis à trouver.
+- **Bonferroni / Holm (correction des tests multiples)** `[M6]` — quand on teste 14 features à 5 %, une feature ressort « significative » par pur hasard une fois sur deux. La correction relève la barre à mesure que le nombre de tests augmente. Sans elle, on court après une dérive qui n'existe pas.
 - **Boucle de rétroaction (feedback loop)** `[M6]` — collecter les vrais labels a posteriori → réentraîner → promouvoir le modèle s'il est meilleur. Ferme le cycle MLOps.
 
 ## C
 
 - **Cadrage** `[M8]` — définir le périmètre d'un projet (besoin réel reformulé, données existantes vs à acquérir, indicateurs, risques) **avant** toute conception.
-- **Calibration** `[M6]` — un modèle est calibré si une probabilité de 0.8 correspond bien à 80 % de cas positifs. Peut se dégrader en production.
+- **Candidat (modèle candidat)** `[M6]` — modèle fraîchement réentraîné, écrit dans un fichier **distinct** du modèle en service, et qui le reste tant qu'une décision de promotion ne l'a pas validé. Confondre les deux fichiers, c'est déployer sans décider.
+- **Calibration** `[M6]` — un modèle est calibré si une probabilité de 0.8 correspond bien à 80 % de cas positifs. Se dégrade en production **sans que le pouvoir de tri bouge** : se lit sur le reliability diagram, se chiffre par l'ECE. Calibration = **exploitation** (≠ seuil de rejet, qui est un choix de conception).
 - **Chi² (test du)** `[M6]` — test statistique pour détecter le data drift sur variables **catégorielles** (vs KS pour les numériques).
 - **CI/CD** `[M5]` — Intégration / Déploiement Continus : automatiser tests, build et livraison à chaque changement de code (GitHub Actions).
 - **Classification** 🎓 `[M1]` — prédire une **classe** (catégorie). Binaire (2 classes) ou multi-classes.
@@ -52,6 +54,7 @@
 - **Data drift** `[M6]` — la **distribution des données entrantes** change par rapport à l'entraînement (nouveaux profils clients). Mesuré par PSI, KS, Chi².
 - **Dataset** 🎓 `[M1]` — jeu de données structuré (lignes = exemples, colonnes = features + cible).
 - **Datasheet (Gebru)** `[M2]` — fiche documentant un dataset (origine, composition, biais, usages recommandés).
+- **Déclencheur sur seuil (trigger)** `[M6]` — condition qui lance le réentraînement (volume de feedbacks non consommés, dérive confirmée). Le compte porte sur ce qui n'a **pas encore servi** : sur le total, le déclencheur se rejoue indéfiniment une fois le seuil franchi.
 - **Déploiement** `[M5]` — mettre un modèle en service (conteneur, API) accessible et surveillé en production.
 - **Disparate impact** 🎓 `[M2/M7]` — ratio de taux positif entre groupe défavorisé et favorisé. Règle des 4/5 : < 0.80 = signal de biais.
 - **Distillation / modèle distillé** `[M7]` — version compressée d'un modèle (ex. `distilbert`), presque aussi performante pour une fraction du coût. Argument de sobriété.
@@ -61,6 +64,7 @@
 ## E
 
 - **EDA** 🎓 `[M2/M4]` — Exploratory Data Analysis : explorer les données (distributions, manquants, corrélations) avant de modéliser.
+- **ECE (Expected Calibration Error)** `[M6]` — écart moyen entre la probabilité annoncée et le taux réellement observé, pondéré par le nombre de cas. 0 = parfaitement calibré. Chiffre la calibration, là où le reliability diagram la montre.
 - **Explicabilité — locale / globale** 🎓 `[M6]` — une explication **locale** dit pourquoi *ce* dossier a reçu *cette* prédiction (ce qu'exige un client, un juriste) ; une explication **globale** dit sur quoi le modèle s'appuie *en général* (ce qu'on met dans une note de conception). Les deux ne se déduisent pas l'une de l'autre.
 - **Explicabilité — par construction / post-hoc** 🎓 `[M6]` — un modèle linéaire ou un arbre court **est** son explication (par construction) ; sur un modèle opaque on applique **après coup** une méthode d'approximation (SHAP, LIME). Choisir un modèle interprétable, c'est éviter d'avoir à l'expliquer.
 - **Embedding** `[M4/M7]` — représentation vectorielle d'un texte/image ; deux objets proches de sens ont des vecteurs proches. Base du RAG et de la recherche par similarité.
@@ -73,6 +77,7 @@
 - **Fallback (stratégie de repli)** `[M7]` — quoi faire quand le modèle n'est pas sûr : seuil de rejet, abstention, revue humaine (HITL). Choix de **conception**, distinct de la réaction au drift.
 - **Feature** 🎓 `[M1]` — variable d'entrée du modèle (une colonne du dataset).
 - **Feature engineering** `[M4]` — créer/transformer des features pour aider le modèle.
+- **Feedback (vérité terrain a posteriori)** `[M6]` — la vraie réponse, connue **après** la prédiction (le prêt a-t-il fait défaut ?), rattachée à elle par un identifiant de requête. C'est la matière première du réentraînement — et une annotation fausse ou écrasée en silence dégrade le modèle suivant.
 - **Fine-tuning** `[M4/M8]` — réentraîner un modèle pré-entraîné sur ses propres données.
 - **Foundation model** `[M4]` — gros modèle pré-entraîné généraliste, réutilisable pour de nombreuses tâches (LLM, CLIP).
 - **Fuite de données (data leakage)** 🎓 `[M4]` — une feature contient (directement ou indirectement) l'information de la cible → score artificiellement parfait, modèle inutile en vrai.
@@ -100,6 +105,7 @@
 - **Importance par permutation** `[M6]` — mesure l'importance d'une variable en **mélangeant sa colonne** et en observant la chute de la métrique sur le jeu de test. À préférer à `feature_importances_` (importance par impureté), qui gonfle artificiellement les variables à nombreuses valeurs distinctes — identifiants compris.
 - **Inférence** 🎓 `[M1]` — utiliser un modèle entraîné pour prédire (`model.predict`), par opposition à l'entraînement.
 - **Jeu de référence** `[M5]` — échantillon stable servant à re-mesurer la performance du modèle release après release (évaluation continue).
+- **Journal de décision (`decisions_log.jsonl`)** `[M6]` — une ligne par exécution de la boucle : métriques de la production, métriques du candidat, décision, raison. La règle dit ce qu'il **faut** faire ; le journal prouve ce qu'elle **a** fait.
 - **KS (test de Kolmogorov-Smirnov)** `[M6]` — test statistique comparant deux distributions ; sert à détecter le data drift sur features numériques.
 
 ## L — M
@@ -109,6 +115,8 @@
 - **LLM (Large Language Model)** `[M7]` — grand modèle de langage généraliste (GPT-4, Mistral, Llama). Puissant, coûteux, opaque.
 - **MAE / RMSE** 🎓 `[M4]` — erreurs moyennes en régression (MAE = écart moyen absolu ; RMSE pénalise plus les grosses erreurs).
 - **Métadonnée** `[M0/M3]` — donnée qui **décrit** une autre donnée (type, source, date, unité, fraîcheur) ; le catalogue de ce qu'on manipule.
+- **Métadonnées de modèle** `[M5/M6]` — le JSON qui accompagne l'artefact (version, version de scikit-learn, empreinte du jeu d'entraînement, métriques). C'est un **contrat** : un service qui lit une clé absente tombe en erreur. On repart des métadonnées de production et on surcharge ce qui change.
+- **Métrique batch / métrique de flux** `[M6]` — une métrique de flux est exposée en continu par un service et scrapée (latence, volume, classes prédites) ; une métrique batch est calculée une fois sur un jeu figé (PSI, F1 sur 12 semaines). Un dashboard ne peut afficher que ce qui est **exposé** — mettre une mesure batch dans Grafana produit un panneau vide.
 - **MLflow** `[M5]` — outil de **tracking** d'expériences : historiser versions, hyperparamètres et métriques pour comparer les runs. N'est pas un détecteur de drift.
 - **MLOps** `[M5]` — pratiques d'industrialisation du ML (CI/CD, monitoring, versionning, réentraînement) ; le DevOps appliqué aux modèles.
 - **Model card** `[M7]` — fiche d'identité d'un modèle (tâche, données, limites, biais, métriques). À lire avant d'adopter un modèle.
@@ -128,7 +136,7 @@
 - **Pipeline (scikit-learn)** `[M2]` — enchaînement reproductible de prétraitements + modèle, en un seul objet persistable.
 - **Précision (precision)** 🎓 `[M1]` — parmi les cas prédits positifs, combien le sont vraiment.
 - **Prometheus** `[M5]` — outil qui **collecte** les métriques exposées par un service (`/metrics`) pour le monitoring (visualisées dans Grafana).
-- **Promotion (conditionnelle)** `[M6]` — ne remplacer le modèle en prod par un réentraîné **que s'il bat l'ancien** sur le jeu de référence. Jamais aveugle.
+- **Promotion (conditionnelle)** `[M6]` — ne remplacer le modèle en prod par un réentraîné **que s'il bat l'ancien**, mesuré sur le **même** jeu de référence. Règle type, écrite avant l'exécution : plancher de qualité tenu, aucune régression critique au-delà de la tolérance, au moins un gain minimum. Un rejet n'est pas une erreur — c'est une décision, et elle se journalise.
 - **PSI (Population Stability Index)** `[M6]` — indice de stabilité d'une distribution entre deux périodes. < 0.1 stable, 0.1-0.25 suspect, > 0.25 dérive.
 - **Pseudo-code** `[M8]` — décrire un composant par ses **signatures + son flux**, sans syntaxe précise ; sert à concevoir sans implémenter.
 - **Pseudonymisation** 🎓 `[M2/M3]` — remplacer les identifiants directs pour réduire le risque de réidentification (≠ anonymisation, irréversible).
@@ -138,9 +146,11 @@
 
 - **RAG (Retrieval-Augmented Generation)** `[M7]` — brancher un LLM sur **vos** documents : retrouver les passages pertinents et les injecter dans le prompt pour des réponses ancrées.
 - **Rappel (recall)** 🎓 `[M1]` — parmi les vrais positifs, combien le modèle en retrouve. Crucial quand rater un positif coûte cher (fraude, panne).
+- **Recalibration (recalage)** `[M6]` — corriger les probabilités d'un modèle dont le **tri reste bon** (ex. Platt, isotonique), sans le réentraîner. Remédiation nettement moins chère : à écarter explicitement avant de proposer un réentraînement complet.
 - **Réentraînement (retraining)** `[M6]` — réentraîner un modèle sur des données plus récentes, déclenché sur un **seuil** (dérive mesurée ou volume de feedback).
 - **Régression** 🎓 `[M4]` — prédire une **valeur continue** (prix, durée), par opposition à la classification.
 - **Réidentification (par croisement)** 🎓 `[M3]` — retrouver une personne en **croisant** plusieurs champs anodins pris isolément (le risque naît du croisement, pas de la colonne seule). Cœur de l'audit RGPD multi-sources (C2 N2).
+- **Reliability diagram (courbe de calibration)** `[M6]` — on regroupe les prédictions par tranche de probabilité et on compare, tranche par tranche, la probabilité annoncée au taux réel observé. La diagonale = calibration parfaite ; en dessous = le modèle surestime le risque.
 - **RGPD** 🎓 `[M2]` — règlement européen sur les données personnelles (base légale, minimisation, art. 9 données sensibles, art. 22 décision automatisée).
 - **ROC-AUC** 🎓 `[M1]` — mesure la capacité d'un modèle à séparer les classes, indépendamment du seuil.
 - **Rollback** `[M5]` — revenir à la version précédente d'un service/modèle après un incident. Procédure clé du runbook.
@@ -149,12 +159,16 @@
 ## S — T
 
 - **Seuil (de décision / de rejet)** `[M1/M7]` — curseur qui transforme une probabilité en décision ; sous le seuil → revue humaine (fallback). Ajustable selon le **coût de l'erreur**, pas une vérité.
+- **Significativité vs ampleur** `[M6]` — deux questions distinctes : la p-value dit si l'écart est **détectable**, le PSI dit s'il est **important**. Sur un gros échantillon, un test signale des écarts négligeables — un chiffre significatif n'est pas un verdict.
 - **SLM (Small Language Model)** `[M8]` — petit modèle de langage (1-3B), souvent suffisant et exécutable en local.
 - **Sobriété** `[transverse]` — choisir la solution la plus simple/légère qui résout le besoin ; garde-fou central du parcours contre le sur-engineering.
 - **SPOF (Single Point of Failure)** `[M7]` — composant unique dont la panne arrête tout le système (ex. modèle sur une seule machine). Risque d'architecture.
 - **SHAP (valeurs de Shapley)** 🎓 `[M6]` — méthode d'explication post-hoc qui répartit l'écart entre la prédiction moyenne et la prédiction d'un dossier entre les variables. Propriété clé : **additivité** (valeur de base + contributions = prédiction exacte). `TreeExplainer` est exact et rapide sur les modèles à arbres.
 - **Split (train/test)** 🎓 `[M1]` — séparer les données pour entraîner d'un côté, évaluer de l'autre. Temporel si l'ordre du temps compte.
+- **Sur-confiance / sous-confiance** `[M6]` — un modèle sur-confiant annonce des probabilités plus élevées que la réalité observée (il crie au loup) ; sous-confiant, l'inverse. Se lit sur le reliability diagram, se chiffre par l'ECE.
 - **Token** `[M7]` — unité de texte (≈ ¾ d'un mot) ; les LLM facturent au token (l'output coûte souvent plus que l'input).
+- **Tolérance (de régression)** `[M6]` — baisse maximale acceptée sur une métrique avant de refuser une nouvelle version. Se fixe sur le **coût métier** d'une régression et sur le bruit de mesure (≥ 2 σ), jamais après avoir vu le résultat : un seuil choisi après coup n'est plus un garde-fou, c'est une justification.
+- **Triangulation (diagnostic de dérive)** `[M6]` — croiser quatre axes — dérive des features, pouvoir de tri (AUC), calibration, temporalité — parce qu'aucun ne prouve seul un type de dérive. Le diagnostic naît du faisceau, et doit énoncer **ce qui manquerait** pour trancher définitivement.
 - **Transfer learning** `[M4]` — réutiliser un modèle pré-entraîné en n'ajustant que ses dernières couches sur sa tâche.
 
 ## V — Z
