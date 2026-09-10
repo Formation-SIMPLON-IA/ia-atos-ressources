@@ -90,7 +90,10 @@
   .synthcard h4{margin:0 0 6px;font-size:13px;text-transform:uppercase;letter-spacing:.04em;color:var(--muted)}
   .synthcard ul{margin:0;padding-left:18px;font-size:14px}
   .synthcard li{margin:4px 0}
-  @media print{.navcards,.backtop{display:none}details{break-inside:avoid}details[open] .corr{display:block}}
+  @media print{.navcards,.backtop,.impleg{display:none}
+    details{break-inside:avoid}
+    details>summary{list-style:none}
+    a[href^="#"]{color:inherit;text-decoration:none}}
   @media(max-width:600px){header.hero h1{font-size:1.6rem}body{font-size:16px}}
 </style>
 </head>
@@ -526,6 +529,24 @@ Rappel    = VP / (VP + FN)      <span class="cm">← dénom. : ce qui est VRAIME
 <footer>
   Fiches de révision CISIA · C1 · C2 · C4 · AI Act &amp; RGPD. Mise en forme d'un contenu de révision — imprimable (chaque correction se déplie).
 </footer>
+
+<script>
+  // Impression directe depuis le navigateur : on déplie les corrections, sinon
+  // elles n'apparaissent pas (un <details> fermé ne se force pas en CSS).
+  // La version PDF distribuée les place en annexe — cf. build_pdf.py.
+  addEventListener("beforeprint", () => {
+    document.querySelectorAll("details:not([open])").forEach(d => {
+      d.open = true;
+      d.dataset.autoOpened = "1";
+    });
+  });
+  addEventListener("afterprint", () => {
+    document.querySelectorAll("details[data-auto-opened]").forEach(d => {
+      d.open = false;
+      delete d.dataset.autoOpened;
+    });
+  });
+</script>
 
 </body>
 </html>
