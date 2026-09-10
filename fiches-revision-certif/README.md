@@ -34,13 +34,3 @@ L'ordre des fiches n'est pas l'ordre de lecture. Priorité :
 Les auto-tests se font **à voix haute, sans relire**. Plus de dix secondes
 d'hésitation sur une question : reprenez la section, ne regardez pas la réponse.
 
-## Régénérer le PDF
-
-Après toute modification du HTML :
-
-```bash
-python build_pdf.py          # → fiches-revision-cisia.pdf
-```
-
-Dépendance : `weasyprint` (`brew install weasyprint`). Le script détecte le
-module Python ou, à défaut, le binaire.
