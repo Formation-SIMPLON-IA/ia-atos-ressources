@@ -56,7 +56,7 @@
 - **Datasheet (Gebru)** `[M2]` — fiche documentant un dataset (origine, composition, biais, usages recommandés).
 - **Déclencheur sur seuil (trigger)** `[M6]` — condition qui lance le réentraînement (volume de feedbacks non consommés, dérive confirmée). Le compte porte sur ce qui n'a **pas encore servi** : sur le total, le déclencheur se rejoue indéfiniment une fois le seuil franchi.
 - **Déploiement** `[M5]` — mettre un modèle en service (conteneur, API) accessible et surveillé en production.
-- **Disparate impact** 🎓 `[M2/M7]` — ratio de taux positif entre groupe défavorisé et favorisé. Règle des 4/5 : < 0.80 = signal de biais.
+- **Disparate impact** 🎓 `[M2/M7]` — ratio de taux positif entre groupe défavorisé et favorisé. Règle des 4/5 : < 0.80 = signal qui déclenche l'investigation (préjudice, erreurs par groupe) — repère conventionnel, pas un verdict.
 - **Distillation / modèle distillé** `[M7]` — version compressée d'un modèle (ex. `distilbert`), presque aussi performante pour une fraction du coût. Argument de sobriété.
 - **Données semi-structurées** `[M3]` — données à structure souple sans schéma tabulaire strict (JSON, XML, logs) ; entre le structuré (table) et le non structuré (texte libre).
 - **Drift (dérive)** `[M6]` — dégradation des performances d'un modèle en production, par data drift ou concept drift.
@@ -89,7 +89,7 @@
 - **GHCR / registry d'images** `[M5]` — registre où la CI/CD stocke les images Docker construites (GitHub Container Registry).
 - **Grafana** `[M5]` — outil de **dashboards** pour visualiser les métriques de monitoring (alimenté par Prometheus). On construit son dashboard, on n'en importe pas un tout fait.
 - **Hallucination** `[M7]` — un LLM affirme avec aplomb une information fausse ; le RAG et l'abstention la réduisent (sans la supprimer).
-- **Haut risque (AI Act)** `[M7]` — catégorie de l'AI Act (Annexe III : santé, justice, emploi…) imposant transparence, traçabilité et supervision humaine.
+- **Haut risque (AI Act)** `[M7]` — catégorie de l'AI Act définie par l'**usage** (art. 6 : composant de sécurité d'un produit réglementé comme un dispositif médical, ou cas listés en Annexe III : emploi, éducation, accès aux services essentiels, triage des urgences…), pas par le secteur. Impose gestion des risques, journalisation, transparence, supervision humaine.
 - **Healthcheck** `[M5]` — endpoint (`/health`) indiquant si un service est vivant ; utilisé par docker-compose et le monitoring.
 - **HITL (Human-in-the-loop)** `[M7]` — un humain valide ou tranche les cas incertains. Répond aux exigences de supervision de l'AI Act.
 - **Holdout (jeu de test final)** 🎓 `[M1]` — part des données mise de côté **avant** toute exploration et modélisation, ouverte **une seule fois** à la fin pour estimer la performance réelle. La validation croisée sert à *choisir* ; le holdout sert à *annoncer un chiffre*. Chaque décision prise en regardant le holdout entame sa neutralité.
