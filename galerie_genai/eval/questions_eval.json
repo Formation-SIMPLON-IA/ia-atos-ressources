@@ -1,0 +1,93 @@
+{
+  "questions": [
+    {
+      "question": "Combien de jours de télétravail par semaine sont autorisés au maximum ?",
+      "doc_attendu": "politique_teletravail.md",
+      "reponse_attendue": "3 jours par semaine"
+    },
+    {
+      "question": "Quel est le montant de l'indemnité journalière de télétravail ?",
+      "doc_attendu": "politique_teletravail.md",
+      "reponse_attendue": "2,60 € par jour (plafond 33 €/mois)"
+    },
+    {
+      "question": "Quel est le plafond de remboursement d'un repas du midi en déplacement ?",
+      "doc_attendu": "procedure_notes_de_frais.md",
+      "reponse_attendue": "18 €"
+    },
+    {
+      "question": "Avant quelle date dois-je soumettre mes notes de frais ?",
+      "doc_attendu": "procedure_notes_de_frais.md",
+      "reponse_attendue": "le 5 du mois suivant la dépense"
+    },
+    {
+      "question": "Jusqu'à quand puis-je reporter mes congés payés non pris ?",
+      "doc_attendu": "faq_conges.md",
+      "reponse_attendue": "jusqu'au 31 mai de l'année N+1"
+    },
+    {
+      "question": "Combien de jours de RTT ont les salariés au forfait jours ?",
+      "doc_attendu": "faq_conges.md",
+      "reponse_attendue": "10 jours de RTT"
+    },
+    {
+      "question": "Quel client VPN est utilisé chez FastIA ?",
+      "doc_attendu": "procedure_acces_vpn.md",
+      "reponse_attendue": "WireGuard"
+    },
+    {
+      "question": "Quelle est la durée de validité du certificat VPN ?",
+      "doc_attendu": "procedure_acces_vpn.md",
+      "reponse_attendue": "12 mois"
+    },
+    {
+      "question": "Quelle est la longueur minimale des mots de passe ?",
+      "doc_attendu": "charte_securite_poste.md",
+      "reponse_attendue": "14 caractères"
+    },
+    {
+      "question": "En combien de temps l'astreinte doit-elle prendre en charge un incident P1 ?",
+      "doc_attendu": "procedure_incident_production.md",
+      "reponse_attendue": "15 minutes, 24/7"
+    },
+    {
+      "question": "Sous combien de jours le postmortem d'un incident doit-il être rédigé ?",
+      "doc_attendu": "procedure_incident_production.md",
+      "reponse_attendue": "5 jours ouvrés"
+    },
+    {
+      "question": "Quelle est la durée de la période d'essai d'un nouveau consultant ?",
+      "doc_attendu": "procedure_onboarding_consultant.md",
+      "reponse_attendue": "4 mois, renouvelable une fois"
+    },
+    {
+      "question": "Quand a lieu le passage en recette du projet Meridian ?",
+      "doc_attendu": "cr_projet_meridian_avril.md",
+      "reponse_attendue": "le 15 mai"
+    },
+    {
+      "question": "Quel est le budget formation annuel d'un consultant ?",
+      "doc_attendu": "catalogue_formations_internes.md",
+      "reponse_attendue": "2 500 € par an"
+    },
+    {
+      "question": "Quel est le montant de la prime d'astreinte hebdomadaire ?",
+      "doc_attendu": "procedure_astreinte.md",
+      "reponse_attendue": "150 € par semaine"
+    }
+  ],
+  "hors_perimetre": [
+    {
+      "question": "Quel est le montant de la prime de cooptation ?",
+      "commentaire": "aucun document ne parle de cooptation"
+    },
+    {
+      "question": "Puis-je télétravailler depuis l'étranger pendant un mois ?",
+      "commentaire": "la politique télétravail ne traite pas l'étranger"
+    },
+    {
+      "question": "Comment demander un congé sabbatique ?",
+      "commentaire": "sujet absent du corpus"
+    }
+  ]
+}

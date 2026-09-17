@@ -1,0 +1,8 @@
+# Galerie explicabilité — versions de référence des notebooks
+pandas>=2.0
+numpy>=1.26
+matplotlib>=3.7
+scikit-learn==1.5.*   # figé : le modèle pyrenex_risk_v2.joblib du notebook 02 a été sérialisé en 1.5.1
+shap>=0.46
+lime>=0.2             # notebook 01, § 6 uniquement (comparaison)
+jupyter

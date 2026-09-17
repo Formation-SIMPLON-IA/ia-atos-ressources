@@ -1,0 +1,10 @@
+pandas>=2.0
+numpy>=1.26
+requests>=2.31
+sentence-transformers>=3.0
+chromadb>=0.5
+rank-bm25>=0.2            # notebook 02 (fusion BM25 + dense)
+langgraph>=0.2            # notebook 03 (orchestration d'agent)
+pydantic>=2.0            # notebook 03 (validation des arguments d'outils)
+jupyter
+# notebook 04 (sur Google Colab, pas en local) : transformers, trl, peft — versions figées dans le notebook
